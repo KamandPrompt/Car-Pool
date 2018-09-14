@@ -1,3 +1,10 @@
 from django.shortcuts import render
 
-# Create your views here.
+def new(request):
+    return
+
+def dashboard(request):
+    return
+
+def addPool(request):
+    return
