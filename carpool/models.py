@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from django.utils.timezone import now
 
 
 class UserManager(BaseUserManager):
@@ -46,3 +47,17 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects = UserManager()
+
+
+class Pool(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    dateTime = models.DateTimeField(default=now)
+    slots = models.ManyToManyField(User, related_name='slots')
+    source = models.CharField(max_length=100)
+    dest = models.CharField(max_length=100)
+    paid = models.BooleanField(default=False)
+    amount = models.PositiveIntegerField(blank=True, null=True)
+
+    def __self__(self):
+        return self.user.first_name + ' ' + self.source + '-' + self.dest
