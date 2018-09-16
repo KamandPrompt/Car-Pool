@@ -16,15 +16,16 @@ class SignUpForm(UserCreationForm):
 
 class PoolForm(forms.ModelForm):
     user = forms.ModelChoiceField(queryset=User.objects.all(), required=False)
+    tot = forms.IntegerField(widget=forms.NumberInput())
     dateTime = forms.DateTimeField(widget=forms.widgets.DateTimeInput())
     source = forms.CharField(max_length=100)
     dest = forms.CharField(max_length=100)
     paid = forms.BooleanField()
-    amount = forms.forms.IntegerField(widget=forms.NumberInput())
+    amount = forms.IntegerField(widget=forms.NumberInput())
 
     class Meta:
         model = Pool
-        fields = ('user', 'dateTime', 'source', 'dest', 'paid', 'amount',)
+        fields = ('user', 'tot', 'dateTime', 'source', 'dest', 'paid', 'amount',)
 
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')

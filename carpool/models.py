@@ -53,6 +53,7 @@ class Pool(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
     dateTime = models.DateTimeField(default=now)
+    tot = models.PositiveIntegerField(default=1)
     slots = models.ManyToManyField(User, related_name='slots')
     source = models.CharField(max_length=100)
     dest = models.CharField(max_length=100)
