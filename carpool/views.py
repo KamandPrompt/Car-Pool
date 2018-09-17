@@ -54,4 +54,13 @@ def dashboard(request):
 
 
 def addPool(request):
-    return
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = PoolForm(request.POST)
+            if form.is_valid():
+                form.save()
+        else:
+            form = PoolForm()
+        return render(request, 'add.html', {'form': form})
+    else:
+        return redirect('log')
