@@ -49,6 +49,26 @@ def new(request):
     return render(request, 'signup.html', {'form': form, 'error': error, })
 
 
+def log(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('/')
+    else:
+        error=""
+        if request.method == 'POST':
+            form = LoginForm(request.POST)
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('inventory')
+            else:
+                error+="Invalid details."
+        else:
+            form = LoginForm()
+        return render(request, 'login.html', {'form': form, 'error': error})
+
+
 def dashboard(request):
     return
 
