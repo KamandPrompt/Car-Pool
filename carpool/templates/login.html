@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+	<title>
+		Sign In | Car-Pool IIT Mandi
+	</title>
+	<link href="{% static 'css/style.css' %}" rel='stylesheet' type='text/css' />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Login , registration, forgot password " . />
+	<link href='http://fonts.googleapis.com/css?family=Cabin:400,500,600,700,400italic,500italic,600italic,700italic' rel='stylesheet' type='text/css'>
+{% endblock %}
+
+{% block content %}
+	<div class="login-01">
+		<div class="one-login hvr-float-shadow">
+			<div class="one-login-head">
+				<h1>IIT MANDI CAR-POOL</h1>
+				<img src="{% static 'images/top-lock.png' %}" alt=""/>
+				<h1>SIGN IN</h1>
+			</div>
+			<form method="post">
+				{% csrf_token %}
+				<li>
+					{{ form.username }}<a href="" class=" icon user"></a>
+				</li>
+				<li>
+					{{ form.password }}<a href="" class=" icon lock"></a>
+				</li>
+				<div class="submit">
+					<input type="submit"  value="SIGN IN" >
+				</div>
+			</form>
+			<h5>Don't have an account?
+				<a href="{% url 'new' %}">Sign Up Now</a>
+			</h5>
+		</div>
+	</div>
+{% endblock %}

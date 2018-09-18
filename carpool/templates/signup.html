@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+	<title>
+		Register | Car-Pool IIT Mandi
+	</title>
+	<link href="{% static 'css/style.css' %}" rel='stylesheet' type='text/css' />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="Login , registration, forgot password " . />
+	<link href='http://fonts.googleapis.com/css?family=Cabin:400,500,600,700,400italic,500italic,600italic,700italic' rel='stylesheet' type='text/css'>
+{% endblock %}
+
+{% block content %}
+	<div class="login-02">
+		<div class="two-login  hvr-float-shadow">
+			<div class="two-login-head">
+				<h2>IIT Mandi Car-Pool</h2>
+				<img src="{% static 'images/top-note.png' %}" alt=""/>
+				<h2>Register</h2>
+			</div>
+			<form method="post">
+				{% csrf_token %}
+				<li>
+					{{ form.email }}<a href="" class=" icon2 mail"></a>
+				</li>
+				<li>
+					{{ form.first_name }}<a href="" class=" icon2 user2"></a>
+				</li>
+				<li>
+					{{ form.last_name }}<a href="" class=" icon2 name"></a>
+				</li>
+				<li>
+					{{ form.password1 }}<a href="" class=" icon2 lock2"></a>
+				</li>
+				<li>
+					{{ form.password2 }}<a href="" class=" icon2 lock2"></a>
+				</li>
+				<div class="submit two">
+					<input type="submit"  value="REGISTER" >
+				</div>
+			</form>
+			<!-- <form>
+				<li>
+					<input type="text" class="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Full Name';}" ><a href="#" class=" icon2 name"></a>
+				</li>
+				<li>
+					<input type="text" class="text" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}" ><a href="#" class=" icon2 user2"></a>
+				</li>
+				<li>
+					<input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"><a href="#" class=" icon2 lock2"></a>
+				</li>
+				<li>
+					<input type="text" class="text" value="E-mail" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-mail';}" ><a href="#" class=" icon2 mail"></a>
+				</li>
+				<div class="submit two">
+					<input type="submit"  value="REGISTER" >
+				</div>
+			</form> -->
+			<h5>Already a member? <a href="{% url 'log' %}">Login Here</a></h5>
+		</div>
+	</div>
+{% endblock %}
