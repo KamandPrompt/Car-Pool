@@ -3,11 +3,11 @@ from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import AuthenticationForm as LoginForm
 from django.template.loader import render_to_string
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, send_mail
 from django.contrib.sites.shortcuts import get_current_site
 from .tokens import account_activation_token
 
-from .forms import SignUpForm, PoolForm
+from .forms import SignUpForm, PoolForm, filterForm
 from .models import Pool, User
 
 
@@ -43,8 +43,9 @@ def new(request):
                 'token': account_activation_token.make_token(user),
             })
             to_email = form.cleaned_data.get('email')
-            email = EmailMessage(mail_subject, message, to=[to_email])
-            email.send()
+            send_mail(mail_subject, message, 'b17110@students.iitmandi.ac.in', [to_email], fail_silently=False)
+            # email = EmailMessage(mail_subject, message, to=[to_email])
+            # email.send()
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form, 'error': error, })
@@ -62,7 +63,7 @@ def log(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('inventory')
+                return redirect('dashboard')
             else:
                 error+="Invalid details."
         else:
@@ -74,7 +75,18 @@ def dashboard(request):
     if request.user.is_authenticated:
         allrides = Pool.objects.all()
         myrides = Pool.objects.filter(slots=request.user)
-        return render(request, 'index.html', {'allrides': allrides, 'myrides': myrides, })
+        if request.method == 'POST':
+            filter = filterForm(request.POST)
+            print(request.POST)
+            indate = request.POST['date_year'] + '-' + request.POST['date_month'] + '-' + request.POST['date_day']
+            CHOICES = {'1': "Mandi", '2': "South Campus", '3': "North Campus", }
+            if 'free' in request.POST:
+                allrides = Pool.objects.filter(source=CHOICES[request.POST['source']], dest=CHOICES[request.POST['dest']], tot__gte=request.POST['tot'], paid=False, dateTime__date = indate, )
+            else:
+                allrides = Pool.objects.filter(source=CHOICES[request.POST['source']], dest=CHOICES[request.POST['dest']], tot__gte=request.POST['tot'], paid=True, dateTime__date = indate, )
+        else:
+            filter = filterForm()
+        return render(request, 'index.html', {'allrides': allrides, 'myrides': myrides, 'filter': filter, })
     else:
         return redirect('log')
 
@@ -90,3 +102,18 @@ def addPool(request):
         return render(request, 'add.html', {'form': form})
     else:
         return redirect('log')
+
+
+def activate(request, uidb64, token):
+    try:
+        user = User.objects.get(pk=uidb64)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    account_activation_token.check_token(user, token)
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        login(request, user)
+        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+    else:
+        return HttpResponse('Activation link is invalid!')

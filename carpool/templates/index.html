@@ -55,10 +55,10 @@
           <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="user-log">
 
-              <a href="add-ride.html">
+              <a href="{% url 'addPool' %}">
                                     Add Ride
                                 </a> /
-              <a href="">
+              <a href="{% url 'logout' %}">
                                     Logout
                                 </a>
 
@@ -202,7 +202,15 @@
 
                 <div class="search-content">
 
-                  <form action="" novalidate autocomplete="off" class="idealforms searchtours">
+                  <form method="post">
+                      {% csrf_token %}
+                      {{ filter }}
+                      <div class="field buttons">
+                        <button type="submit" class="btn btn-lg green-color">Search</button>
+                      </div>
+                  </form>
+
+                  <!-- <form action="" novalidate autocomplete="off" class="idealforms searchtours">
 
                     <div class="row">
 
@@ -268,7 +276,7 @@
                       </div>
 
 
-                  </form>
+                  </form> -->
                 </div><!-- end .search-content -->
 
               </div><!-- end .col-sm-12 -->

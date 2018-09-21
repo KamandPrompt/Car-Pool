@@ -116,6 +116,16 @@ USE_TZ = True
 
 AUTH_USER_MODEL = 'carpool.User'
 
+LOGOUT_REDIRECT_URL = '/log/'
+
+LOGIN_REDIRECT_URL = '/'
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = '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'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
