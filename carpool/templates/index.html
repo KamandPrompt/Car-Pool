@@ -171,10 +171,15 @@
                     </li><!-- end .ride-people -->
 
                   <li>
-                    <a href="#">
-                                                <i class="fa fa-times" aria-hidden="true"></i>
-                                                Cancel Ride
-                                            </a>
+                    {% for form in delform %}
+                    {% if ride.pk == form.pk.value %}
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ form }}
+                            <button type="submit" name="del" class="cancel">Cancel</button>
+                        </form>
+                    {% endif %}
+                    {% endfor %}
                   </li>
 
                 </ul><!-- end .ride-meta -->
@@ -206,7 +211,7 @@
                       {% csrf_token %}
                       {{ filter }}
                       <div class="field buttons">
-                        <button type="submit" class="btn btn-lg green-color">Search</button>
+                        <button type="submit" class="btn btn-lg green-color" name="filter">Search</button>
                       </div>
                   </form>
 

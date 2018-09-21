@@ -1843,3 +1843,9 @@ ul.social-icons
     cursor: pointer;
     font-size: 12px;
 }
+
+.cancel
+{
+    background-color: white;
+    color: #63a599;
+}

@@ -53,3 +53,7 @@ class filterForm(forms.Form):
     free = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'checkbox'}))
     tot = forms.IntegerField(widget=forms.NumberInput(), label="Slots")
     date = forms.DateField(widget=forms.SelectDateWidget())
+
+
+class DeleteForm(forms.Form):
+    pk = forms.IntegerField(widget=forms.HiddenInput())

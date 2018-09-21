@@ -6,8 +6,9 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMessage, send_mail
 from django.contrib.sites.shortcuts import get_current_site
 from .tokens import account_activation_token
+import datetime
 
-from .forms import SignUpForm, PoolForm, filterForm
+from .forms import SignUpForm, PoolForm, filterForm, DeleteForm
 from .models import Pool, User
 
 
@@ -73,12 +74,13 @@ def log(request):
 
 def dashboard(request):
     if request.user.is_authenticated:
-        allrides = Pool.objects.all()
-        myrides = Pool.objects.filter(slots=request.user)
-        # print(allrides[0].dateTime)
-        if request.method == 'POST':
+        allrides = Pool.objects.filter(dateTime__date__gt = datetime.date.today())
+        myrides = Pool.objects.filter(slots=request.user, dateTime__date__gt = datetime.date.today())
+        delform = []
+        for ride in myrides:
+            delform += [DeleteForm(initial={'pk': ride.pk})]
+        if request.method == 'POST' and 'filter' in request.POST:
             filter = filterForm(request.POST)
-            # print(request.POST)
             indate = request.POST['date_year'] + '-' + request.POST['date_month'] + '-' + request.POST['date_day']
             CHOICES = {'1': "Mandi", '2': "South Campus", '3': "North Campus", }
             if 'free' in request.POST:
@@ -87,7 +89,13 @@ def dashboard(request):
                 allrides = Pool.objects.filter(source=CHOICES[request.POST['source']], dest=CHOICES[request.POST['dest']], tot__gte=request.POST['tot'], paid=True, dateTime__date = indate, )
         else:
             filter = filterForm()
-        return render(request, 'index.html', {'allrides': allrides, 'myrides': myrides, 'filter': filter, })
+        if request.method == 'POST' and 'del' in request.POST:
+            form = DeleteForm(request.POST)
+            print(request.POST)
+            my_pool = Pool.objects.get(pk=form['pk'].value())
+            my_pool.slots.remove(request.user)
+        myrides = Pool.objects.filter(slots=request.user, dateTime__date__gt = datetime.date.today())
+        return render(request, 'index.html', {'allrides': allrides, 'myrides': myrides, 'filter': filter, 'delform': delform})
     else:
         return redirect('log')
 
