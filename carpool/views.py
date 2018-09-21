@@ -8,6 +8,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from .tokens import account_activation_token
 
 from .forms import SignUpForm, PoolForm
+from .models import Pool, User
 
 
 def IITmail(request):
@@ -70,7 +71,12 @@ def log(request):
 
 
 def dashboard(request):
-    return render(request, 'index.html', {})
+    if request.user.is_authenticated:
+        allrides = Pool.objects.all()
+        myrides = Pool.objects.filter(slots=request.user)
+        return render(request, 'index.html', {'allrides': allrides, 'myrides': myrides, })
+    else:
+        return redirect('log')
 
 
 def addPool(request):

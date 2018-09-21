@@ -147,28 +147,28 @@
             </div>
 
             <div class="col-md-12 col-sm-12 col-xs-12">
-
+              {% for ride in myrides %}
               <article class="ride-box clearfix">
 
                 <div class="ride-content">
-                  <h3><a href="#">From Plovdiv to Sofia</a></h3>ride by <a href="#">Stefan Valkov</a>
+                  <h3><a href="#">From {{ ride.source }} to {{ ride.dest }}</a></h3>ride by <a href="#">{{ ride.user.first_name }} {{ ride.user.last_name }}</a>
                 </div>
 
                 <ul class="ride-meta">
 
-                  <li class="ride-date">
-                    <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
-                                                <i class="fa fa-calendar"></i>
-                                                July 20, 2014 at 19:00 PM
-                                            </a>
-                  </li><!-- end .ride-date -->
+                    <li class="ride-date">
+                      <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
+                                                        <i class="fa fa-calendar"></i>
+                                                        {{ ride.dateTime }}
+                                                    </a>
+                    </li><!-- end .ride-date -->
 
-                  <li class="ride-people">
-                    <a href="#" class="tooltip-link" data-original-title="Number of seats" data-toggle="tooltip">
-                                                <i class="fa fa-user"></i>
-                                                1
-                                            </a>
-                  </li><!-- end .ride-people -->
+                    <li class="ride-people">
+                      <a href="#" class="tooltip-link" data-original-title="Number of seats" data-toggle="tooltip">
+                                                        <i class="fa fa-user"></i>
+                                                        {{ ride.tot }}
+                                                    </a>
+                    </li><!-- end .ride-people -->
 
                   <li>
                     <a href="#">
@@ -180,6 +180,7 @@
                 </ul><!-- end .ride-meta -->
 
               </article><!-- end .ride-box -->
+              {% endfor %}
               <div class="clearfix"></div>
             </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
           </div><!-- end .last-rides -->
@@ -277,11 +278,11 @@
                 <div class="page-content">
 
                   <div class="rides-list">
-
+                    {% for ride in allrides %}
                     <article class="ride-box clearfix">
 
                       <div class="ride-content">
-                        <h3><a href="#">From Plovdiv to Sofia</a></h3>ride by <a href="#">Stefan Valkov</a>
+                        <h3><a href="#">From {{ ride.source }} to {{ ride.dest }}</a></h3>ride by <a href="#">{{ ride.user.first_name }} {{ ride.user.last_name }}</a>
                       </div>
 
                       <ul class="ride-meta">
@@ -289,14 +290,14 @@
                         <li class="ride-date">
                           <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
                                                             <i class="fa fa-calendar"></i>
-                                                            July 20, 2014 at 19:00 PM
+                                                            {{ ride.dateTime }}
                                                         </a>
                         </li><!-- end .ride-date -->
 
                         <li class="ride-people">
                           <a href="#" class="tooltip-link" data-original-title="Number of seats" data-toggle="tooltip">
                                                             <i class="fa fa-user"></i>
-                                                            1
+                                                            {{ ride.tot }}
                                                         </a>
                         </li><!-- end .ride-people -->
 
@@ -310,6 +311,7 @@
                       </ul><!-- end .ride-meta -->
 
                     </article><!-- end .ride-box -->
+                    {% endfor %}
 
                     <div class="clearfix"></div>
 
