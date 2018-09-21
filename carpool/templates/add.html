@@ -2,6 +2,7 @@
 <!--[if IE 7]>                  <html class="ie7 no-js" lang="en">     <![endif]-->
 <!--[if lte IE 8]>              <html class="ie8 no-js" lang="en">     <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--> <html class="not-ie no-js" lang="en">  <!--<![endif]-->
+{% load static %}
     <head>
 
         <!-- Basic Page Needs -->
@@ -17,23 +18,23 @@
         <!-- Styles -->
 
         <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
         <!-- Forms -->
-        <link href="css/jquery.idealforms.css" rel="stylesheet">
+        <link href="{% static 'css/jquery.idealforms.css' %}" rel="stylesheet">
         <!-- Select  -->
-        <link href="css/jquery.idealselect.css" rel="stylesheet">
+        <link href="{% static 'css/jquery.idealselect.css' %}" rel="stylesheet">
         <!-- Slicknav  -->
-        <link href="css/slicknav.css" rel="stylesheet">
+        <link href="{% static 'css/slicknav.css' %}" rel="stylesheet">
         <!-- Main style -->
-        <link href="css/style.css" rel="stylesheet">
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 
         <!-- Modernizr -->
-        <script src="js/modernizr.js"></script>
+        <script src="{% static 'js/modernizr.js' %}"></script>
 
         <!-- Fonts -->
-        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-        <link rel="shortcut icon" type="image/ico" href="img/favicon.ico"/>
+        <link rel="shortcut icon" type="image/ico" href="{% static 'img/favicon.ico' %}"/>
 
 
     </head>
@@ -74,7 +75,7 @@
 
         <div class="main-baner">
 
-            <div class="background parallax clearfix" style="background-image:url('img/tumblr_n7yhhvUQtx1st5lhmo1_1280.jpg');" data-img-width="1600" data-img-height="1064">
+            <div class="background parallax clearfix" style="background-image:url('{% static 'img/tumblr_n7yhhvUQtx1st5lhmo1_1280.jpg' %}');" data-img-width="1600" data-img-height="1064">
 
                 <div class="main-parallax-content">
 
@@ -292,23 +293,23 @@
         <!-- Javascript -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <!-- Bootstrap -->
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
         <!-- Main jQuery -->
-        <script type="text/javascript" src="js/jquery.main.js"></script>
+        <script type="text/javascript" src="{% static 'js/jquery.main.js' %}"></script>
         <!-- Form -->
-        <script type="text/javascript" src="js/jquery.idealforms.min.js"></script>
-        <script type="text/javascript" src="js/jquery.idealselect.min.js"></script>
-        <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/jquery.idealforms.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/jquery.idealselect.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/jquery-ui-1.10.4.custom.min.js' %}"></script>
         <!-- Menu -->
-        <script type="text/javascript" src="js/hoverIntent.js"></script>
-        <script type="text/javascript" src="js/superfish.js"></script>
+        <script type="text/javascript" src="{% static 'js/hoverIntent.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/superfish.js' %}"></script>
         <!-- Counter-Up  -->
         <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
-        <script type="text/javascript" src="js/jquery.counterup.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/jquery.counterup.min.js' %}"></script>
         <!-- Rating  -->
-        <script type="text/javascript" src="js/bootstrap-rating-input.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/bootstrap-rating-input.min.js' %}"></script>
         <!-- Slicknav  -->
-        <script type="text/javascript" src="js/jquery.slicknav.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/jquery.slicknav.min.js' %}"></script>
 
     </body>
 </html>

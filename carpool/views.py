@@ -70,7 +70,7 @@ def log(request):
 
 
 def dashboard(request):
-    return
+    return render(request, 'index.html', {})
 
 
 def addPool(request):
