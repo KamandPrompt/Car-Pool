@@ -57,3 +57,7 @@ class filterForm(forms.Form):
 
 class DeleteForm(forms.Form):
     pk = forms.IntegerField(widget=forms.HiddenInput())
+
+
+class AddForm(forms.Form):
+    pk = forms.IntegerField(widget=forms.HiddenInput())

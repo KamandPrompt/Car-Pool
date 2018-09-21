@@ -8,7 +8,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from .tokens import account_activation_token
 import datetime
 
-from .forms import SignUpForm, PoolForm, filterForm, DeleteForm
+from .forms import SignUpForm, PoolForm, filterForm, DeleteForm, AddForm
 from .models import Pool, User
 
 
@@ -77,6 +77,7 @@ def dashboard(request):
         allrides = Pool.objects.filter(dateTime__date__gt = datetime.date.today())
         myrides = Pool.objects.filter(slots=request.user, dateTime__date__gt = datetime.date.today())
         delform = []
+        addform = []
         for ride in myrides:
             delform += [DeleteForm(initial={'pk': ride.pk})]
         if request.method == 'POST' and 'filter' in request.POST:
@@ -89,13 +90,24 @@ def dashboard(request):
                 allrides = Pool.objects.filter(source=CHOICES[request.POST['source']], dest=CHOICES[request.POST['dest']], tot__gte=request.POST['tot'], paid=True, dateTime__date = indate, )
         else:
             filter = filterForm()
+        for ride in allrides:
+            addform += [AddForm(initial={'pk': ride.pk})]
         if request.method == 'POST' and 'del' in request.POST:
             form = DeleteForm(request.POST)
-            print(request.POST)
             my_pool = Pool.objects.get(pk=form['pk'].value())
             my_pool.slots.remove(request.user)
+        if request.method == 'POST' and 'add' in request.POST:
+            form = AddForm(request.POST)
+            my_pool = Pool.objects.get(pk=form['pk'].value())
+            my_pool.slots.add(request.user)
         myrides = Pool.objects.filter(slots=request.user, dateTime__date__gt = datetime.date.today())
-        return render(request, 'index.html', {'allrides': allrides, 'myrides': myrides, 'filter': filter, 'delform': delform})
+        delform = []
+        addform = []
+        for ride in myrides:
+            delform += [DeleteForm(initial={'pk': ride.pk})]
+        for ride in allrides:
+            addform += [AddForm(initial={'pk': ride.pk})]
+        return render(request, 'index.html', {'allrides': allrides, 'myrides': myrides, 'filter': filter, 'delform': delform, 'addform': addform})
     else:
         return redirect('log')
 

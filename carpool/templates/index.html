@@ -315,10 +315,15 @@
                         </li><!-- end .ride-people -->
 
                         <li>
-                          <a href="#">
-                                                            <i class="fa fa-file"></i>
-                                                            Book Ride
-                                                        </a>
+                            {% for form in addform %}
+                            {% if ride.pk == form.pk.value %}
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    {{ form }}
+                                    <button type="submit" name="add" class="cancel">Book Ride</button>
+                                </form>
+                            {% endif %}
+                            {% endfor %}
                         </li>
 
                       </ul><!-- end .ride-meta -->
