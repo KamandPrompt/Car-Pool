@@ -57,10 +57,10 @@
               <div class="col-md-4 col-sm-4 col-xs-12">
                 <div class="user-log">
 
-                  <a href="index.html">
-                                        home
+                  <a href="{% url 'dashboard' %}">
+                                        Home
                                     </a> /
-                  <a href="">
+                  <a href="{% url 'logout' %}">
                                         Logout
                                     </a>
 
@@ -131,9 +131,26 @@
 
                         <div class="page-content add-new-ride">
 
-                            <form action="" novalidate autocomplete="off" class="idealforms add-ride">
-
-                                <div class="field">
+                            <form method="post">
+                                {% csrf_token %}
+                                {% for field in form %}
+                                  {% if forloop.counter == 1 %}
+                                    <div style="display: none;">
+                                      {{ field }}
+                                    </div>
+                                  {% else %}
+                                    <label>{{ field.label_tag }}</label>
+                                    <div>
+                                      {{ field }}
+                                    </div>
+                                    {{ field.errors }}
+                                    <br>
+                                  {% endif %}
+                                {% endfor %}
+                                <div class="field buttons">
+                                    <button type="submit" class="btn btn-lg green-color">Submit</button>
+                                </div>
+                                <!-- <div class="field">
                                     <select id="destination" name="destination">
                                         <option value="default">From</option>
                                         <option>Mandi</option>
@@ -166,11 +183,8 @@
 
                                 <div class="field">
                                     <input type="number" id="text" name="text" placeholder="Amount">
-                                </div>
+                                </div> -->
 
-                                <div class="field buttons">
-                                    <button type="submit" class="btn btn-lg green-color">Submit</button>
-                                </div>
 
                             </form>
 

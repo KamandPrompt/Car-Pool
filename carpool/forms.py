@@ -15,14 +15,21 @@ class SignUpForm(UserCreationForm):
                   'password1', 'password2', )
 
 
+CHOICE = (
+    ("Mandi", _("Mandi")),
+    ("South Campus", _("South Campus")),
+    ("North Campus", _("North Campus")),
+)
+
+
 class PoolForm(forms.ModelForm):
     user = forms.ModelChoiceField(queryset=User.objects.all(), required=False)
-    tot = forms.IntegerField(widget=forms.NumberInput())
-    dateTime = forms.DateTimeField(widget=forms.widgets.DateTimeInput())
-    source = forms.CharField(max_length=100)
-    dest = forms.CharField(max_length=100)
-    paid = forms.BooleanField()
-    amount = forms.IntegerField(widget=forms.NumberInput())
+    tot = forms.IntegerField(widget=forms.NumberInput(), label="Seats")
+    dateTime = forms.DateTimeField(widget=forms.widgets.DateTimeInput(), label="Date Time YYYY-MM-DD HH:MM")
+    source = forms.ChoiceField(choices=CHOICE, initial='', widget=forms.Select())
+    dest = forms.ChoiceField(choices=CHOICE, label="destination", initial='', widget=forms.Select())
+    paid = forms.BooleanField(required=False)
+    amount = forms.IntegerField(widget=forms.NumberInput(), required=False)
 
     class Meta:
         model = Pool

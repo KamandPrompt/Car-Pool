@@ -75,9 +75,10 @@ def dashboard(request):
     if request.user.is_authenticated:
         allrides = Pool.objects.all()
         myrides = Pool.objects.filter(slots=request.user)
+        # print(allrides[0].dateTime)
         if request.method == 'POST':
             filter = filterForm(request.POST)
-            print(request.POST)
+            # print(request.POST)
             indate = request.POST['date_year'] + '-' + request.POST['date_month'] + '-' + request.POST['date_day']
             CHOICES = {'1': "Mandi", '2': "South Campus", '3': "North Campus", }
             if 'free' in request.POST:
@@ -94,11 +95,11 @@ def dashboard(request):
 def addPool(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            form = PoolForm(request.POST)
+            form = PoolForm(request.POST, initial={'paid': False, 'user': request.user})
             if form.is_valid():
                 form.save()
         else:
-            form = PoolForm()
+            form = PoolForm(initial={'paid': False, 'user': request.user})
         return render(request, 'add.html', {'form': form})
     else:
         return redirect('log')

@@ -18,7 +18,7 @@
 				<img src="{% static 'images/top-note.png' %}" alt=""/>
 				<h2>Register</h2>
 			</div>
-			<form method="post">
+			<form method="post" autocomplete="off">
 				{% csrf_token %}
 				<li>
 					{{ form.email }}<a href="" class=" icon2 mail"></a>
