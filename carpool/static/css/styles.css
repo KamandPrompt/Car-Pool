@@ -1466,7 +1466,7 @@ form textarea
 {
     padding: 1em;
     background: #fff;
-    margin: 3em 3em 2em 3em;
+    margin: 3em 3em 6em 3em;
 }
 .checkbox
 {
@@ -1846,6 +1846,8 @@ ul.social-icons
 
 .cancel
 {
-    background-color: white;
+    background-color: inherit;
     color: #63a599;
+    padding-top: 0;
+    padding-bottom: 0;
 }

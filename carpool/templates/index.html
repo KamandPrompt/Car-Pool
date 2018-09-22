@@ -176,7 +176,7 @@
                         <form method="POST">
                             {% csrf_token %}
                             {{ form }}
-                            <button type="submit" name="del" class="cancel">Cancel</button>
+                            <button type="submit" name="del" class="cancel"><i class="fa fa-times"></i> Cancel</button>
                         </form>
                     {% endif %}
                     {% endfor %}
@@ -320,7 +320,7 @@
                                 <form method="POST">
                                     {% csrf_token %}
                                     {{ form }}
-                                    <button type="submit" name="add" class="cancel">Book Ride</button>
+                                    <button type="submit" name="add" class="cancel"><i class="fa fa-file"></i> Book Ride</button>
                                 </form>
                             {% endif %}
                             {% endfor %}
