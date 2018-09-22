@@ -75,7 +75,7 @@ def log(request):
 
 def dashboard(request):
     if request.user.is_authenticated:
-        allrides = Pool.objects.filter(dateTime__date__gt = datetime.date.today())
+        allrides = Pool.objects.filter(dateTime__date__gt = datetime.date.today(), tot__gt=0)
         myrides = Pool.objects.filter(slots=request.user, dateTime__date__gt = datetime.date.today())
         delform = []
         addform = []
@@ -97,10 +97,16 @@ def dashboard(request):
             form = DeleteForm(request.POST)
             my_pool = Pool.objects.get(pk=form['pk'].value())
             my_pool.slots.remove(request.user)
+            my_pool.tot=my_pool.tot+1
+            my_pool.save()
+            allrides = Pool.objects.filter(dateTime__date__gt = datetime.date.today(), tot__gt=0)
         if request.method == 'POST' and 'add' in request.POST:
             form = AddForm(request.POST)
             my_pool = Pool.objects.get(pk=form['pk'].value())
             my_pool.slots.add(request.user)
+            my_pool.tot=my_pool.tot-1
+            my_pool.save()
+            allrides = Pool.objects.filter(dateTime__date__gt = datetime.date.today(), tot__gt=0)
         myrides = Pool.objects.filter(slots=request.user, dateTime__date__gt = datetime.date.today())
         delform = []
         addform = []
