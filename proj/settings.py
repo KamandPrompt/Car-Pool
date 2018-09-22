@@ -120,11 +120,12 @@ LOGOUT_REDIRECT_URL = '/log/'
 
 LOGIN_REDIRECT_URL = '/'
 
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = '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'
-EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'stachackweek@gmail.com'
+EMAIL_HOST_PASSWORD = 'hackstac'
+EMAIL_PORT = 587
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/

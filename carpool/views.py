@@ -5,6 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm as LoginForm
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage, send_mail
 from django.contrib.sites.shortcuts import get_current_site
+from django.conf import settings
 from .tokens import account_activation_token
 import datetime
 
