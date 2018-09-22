@@ -24,6 +24,7 @@ def IITmail(request):
 
 def new(request):
     error=""
+    done=False
     if request.user.is_authenticated:
         return HttpResponseRedirect('/')
     if request.method == 'POST':
@@ -45,12 +46,13 @@ def new(request):
                 'token': account_activation_token.make_token(user),
             })
             to_email = form.cleaned_data.get('email')
-            send_mail(mail_subject, message, 'b17110@students.iitmandi.ac.in', [to_email], fail_silently=False)
+            send_mail(mail_subject, message, 'Hackweek@example.com', [to_email], fail_silently=False)
+            done=True
             # email = EmailMessage(mail_subject, message, to=[to_email])
             # email.send()
     else:
         form = SignUpForm()
-    return render(request, 'signup.html', {'form': form, 'error': error, })
+    return render(request, 'signup.html', {'form': form, 'error': error, 'done': done, })
 
 
 def log(request):

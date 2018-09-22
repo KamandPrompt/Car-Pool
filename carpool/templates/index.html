@@ -155,7 +155,14 @@
                 </div>
 
                 <ul class="ride-meta">
-
+                    <li class="ride-date tooltip-link">
+                        <i class="fa fa-inr"></i>
+                        {% if ride.amount == None %}
+                            0
+                        {% else %}
+                            {{ ride.amount }}
+                        {% endif %}
+                    </li>
                     <li class="ride-date">
                       <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
                                                         <i class="fa fa-calendar"></i>
@@ -299,7 +306,14 @@
                       </div>
 
                       <ul class="ride-meta">
-
+                          <li class="ride-date tooltip-link">
+                              <i class="fa fa-inr"></i>
+                              {% if ride.amount == None %}
+                                  0
+                              {% else %}
+                                  {{ ride.amount }}
+                              {% endif %}
+                          </li>
                         <li class="ride-date">
                           <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
                                                             <i class="fa fa-calendar"></i>
