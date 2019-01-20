@@ -9,7 +9,7 @@ This project is made using Django 2.1 for backend.
 1. Create a virtual environment and activate it.
 
 ```console
-$ pyvenv hack
+$ python3 -m venv hack
 $ source hack/bin/activate
 ```
 
