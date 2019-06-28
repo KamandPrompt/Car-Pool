@@ -205,6 +205,17 @@
                             <div class="field buttons">
                                 <button type="submit" class="submit btn green-color">Log in</button>
                             </div>
+                             <div>
+                                      {% if messages %}
+                                      <ul class="messages">
+		                              {% for message in messages %}
+		                              <li>
+		                              <div class="alert alert-success"> {{ message }} </div>
+		                              </li>
+		                              {% endfor %}
+                                      </ul>
+                                      {% endif %}
+                            </div>
 
                             <a href="#" class="log-twitter twitter"><i class="fa fa-twitter"></i>Twitter</a>
                             <a href="#" class="log-facebook facebook"><i class="fa fa-facebook"></i>Facebook</a>
