@@ -128,10 +128,10 @@ def addPool(request):
             form = PoolForm(request.POST, initial={'paid': False, 'user': request.user})
             if form.is_valid():
                 form.save()
+                messages.success(request,'Ride added successfully')
         else:
             form = PoolForm(initial={'paid': False, 'user': request.user})
         return render(request, 'add.html', {'form': form})
-        messages.success(request,'Ride added successfully') 
     else:
         return redirect('log')
 

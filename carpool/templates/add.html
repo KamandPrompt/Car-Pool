@@ -89,6 +89,18 @@
 
                     </div><!-- end .col-lg-12 -->
 
+                    <div>
+                          {% if messages %}
+                          <ul class="messages">
+                          {% for message in messages %}
+                          <li>
+                          <div class="alert alert-success"> {{ message }} </div>
+                          </li>
+                          {% endfor %}
+                          </ul>
+                          {% endif %}
+                    </div>
+
                     <div class="col-sm-12 col-md-12 col-xs-12 add-rideclass">
 
                         <div class="page-content add-new-ride">
@@ -112,42 +124,6 @@
                                 <div class="field buttons">
                                     <button type="submit" class="btn btn-lg green-color">Submit</button>
                                 </div>
-                                <!-- <div class="field">
-                                    <select id="destination" name="destination">
-                                        <option value="default">From</option>
-                                        <option>Mandi</option>
-                                        <option>South Campus</option>
-                                        <option>North Campus</option>
-                                    </select>
-                                </div>
-
-                                <div class="field">
-                                    <select id="destinationd" name="destinationd">
-                                        <option value="default">To</option>
-                                        <option>Mandi</option>
-                                        <option>South Campus</option>
-                                        <option>North Campus</option>
-                                    </select>
-                                </div>
-
-                                <div class="field">
-                                    <input name="event" type="text" placeholder="Date" class="datepicker">
-                                </div>
-
-                                <div class="field">
-                                    <select id="destination" name="destination">
-                                        <option value="default">Number of seats</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                    </select>
-                                </div>
-
-                                <div class="field">
-                                    <input type="number" id="text" name="text" placeholder="Amount">
-                                </div> -->
-
-
                             </form>
 
                         </div><!-- end .page-content -->
@@ -176,106 +152,6 @@
             </div><!-- end .footer-copyright -->
 
         </footer><!-- end #footer -->
-
-        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div><!-- end .modal-header -->
-
-                    <div class="modal-body">
-                        <form action="" novalidate autocomplete="off" class="idealforms login">
-
-                            <div class="log-header">
-                                <span class="log-in">Log in</span>
-                            </div>
-
-                            <div class="field">
-                                <input name="username" type="text" placeholder="Username">
-                                <span class="error"></span>
-                            </div>
-
-                            <div class="field">
-                                <input type="password" name="password" placeholder="Password">
-                                <span class="error"></span>
-                            </div>
-
-                            <div class="field buttons">
-                                <button type="submit" class="submit btn green-color">Log in</button>
-                            </div>
-                             <div>
-                                      {% if messages %}
-                                      <ul class="messages">
-		                              {% for message in messages %}
-		                              <li>
-		                              <div class="alert alert-success"> {{ message }} </div>
-		                              </li>
-		                              {% endfor %}
-                                      </ul>
-                                      {% endif %}
-                            </div>
-
-                            <a href="#" class="log-twitter twitter"><i class="fa fa-twitter"></i>Twitter</a>
-                            <a href="#" class="log-facebook facebook"><i class="fa fa-facebook"></i>Facebook</a>
-
-                            <div class="clearfix"></div>
-
-                        </form><!-- end .login -->
-                    </div><!-- end .modal-body -->
-
-                </div><!-- end .modal-content -->
-            </div><!-- end .modal-dialog -->
-        </div><!-- end .modal -->
-
-        <div class="modal fade" id="regModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-
-                    <div class="modal-body">
-                        <form action="" novalidate autocomplete="off" class="idealforms reg">
-
-                            <div class="log-header">
-                                <span class="log-in">Sign up</span>
-                            </div>
-
-                            <div class="field">
-                                <input name="username" type="text" placeholder="Username">
-                                <span class="error"></span>
-                            </div>
-
-                            <div class="field">
-                                <input name="email" type="email"  placeholder="E-Mail">
-                                <span class="error"></span>
-                            </div>
-
-                            <div class="field">
-                                <input type="password" name="password" placeholder="Password">
-                                <span class="error"></span>
-                            </div>
-
-                            <div class="field">
-                                <input name="confirmpass" type="password"  placeholder="Password">
-                                <span class="error"></span>
-                            </div>
-
-                            <div class="field buttons">
-                                <button type="submit" class="submit btn green-color">Sign up</button>
-                            </div>
-
-                            <div class="clearfix"></div>
-
-                        </form><!-- end .reg -->
-                    </div><!-- end .modal-body -->
-
-                </div><!-- end .modal-content -->
-            </div><!-- end .modal-dialog -->
-        </div><!-- end .modal -->
 
         <!-- Javascript -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
