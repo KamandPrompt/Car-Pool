@@ -52,7 +52,7 @@ class filterForm(forms.Form):
     dest = forms.ChoiceField(choices=CHOICES, label="To", initial='', widget=forms.Select())
     free = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'checkbox'}))
     tot = forms.IntegerField(widget=forms.NumberInput(), label="Slots")
-    date = forms.DateField(widget=forms.DateInput(attrs={'id':'datepicker-3'}))
+    date = forms.CharField(widget=forms.TextInput(attrs={'id':'datepicker-3'}))
 
 
 class DeleteForm(forms.Form):
