@@ -41,6 +41,7 @@
 
     <body>
 
+    <input 
       <header class="header">
 
         <div class="top-menu">
@@ -272,6 +273,15 @@
         <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
         <!-- Main jQuery -->
         <script type="text/javascript" src="{% static 'js/jquery.main.js' %}"></script>
+        <!--for the datepicker-->
+        <script src="{% static 'js/jquery.simple-dtpicker.js' %}"></script>
+        <link href="{% static 'css/jquery.simple-dtpicker.css' %}" rel="stylesheet" />
+        <script>
+         $(function() {
+            $( "#datepicker-3" ).appendDtpicker();
+         });
+        </script>
+        <!--end of datepicker setup-->
         <!-- Form -->
         <script type="text/javascript" src="{% static 'js/jquery.idealforms.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/jquery.idealselect.min.js' %}"></script>

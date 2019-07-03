@@ -24,7 +24,7 @@ CHOICE = (
 class PoolForm(forms.ModelForm):
     user = forms.ModelChoiceField(queryset=User.objects.all(), required=False)
     tot = forms.IntegerField(widget=forms.NumberInput(), label="Seats")
-    dateTime = forms.DateTimeField(widget=forms.widgets.DateTimeInput(), label="Date Time YYYY-MM-DD HH:MM")
+    dateTime = forms.CharField(widget=forms.TextInput(attrs={'id':'datepicker-3'}))
     source = forms.ChoiceField(choices=CHOICE, initial='', widget=forms.Select())
     dest = forms.ChoiceField(choices=CHOICE, label="destination", initial='', widget=forms.Select())
     paid = forms.BooleanField(required=False)
