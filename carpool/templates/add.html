@@ -35,7 +35,14 @@
         <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
         <link rel="shortcut icon" type="image/ico" href="{% static 'img/favicon.ico' %}"/>
-
+    
+        <style>
+	img {
+	  display: block;
+	  margin-left: auto;
+	  margin-right: auto;
+	   }
+	</style>
 
     </head>
 
@@ -89,17 +96,21 @@
 
                     </div><!-- end .col-lg-12 -->
 
-                    <div>
+                    <div class="messages">
+			              <font align = "center">
                           {% if messages %}
-                          <ul class="messages">
+                           <img src = "{% static "images/success.gif" %}">                   
+                        
                           {% for message in messages %}
-                          <li>
+                          
                           <div class="alert alert-success"> {{ message }} </div>
-                          </li>
+                          
                           {% endfor %}
-                          </ul>
+                      
                           {% endif %}
+                          </font>
                     </div>
+
 
                     <div class="col-sm-12 col-md-12 col-xs-12 add-rideclass">
 
