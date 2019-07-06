@@ -3,7 +3,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.forms import UserCreationForm
 from .models import User, Pool
 
-
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
     last_name = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
@@ -25,7 +24,7 @@ CHOICE = (
 class PoolForm(forms.ModelForm):
     user = forms.ModelChoiceField(queryset=User.objects.all(), required=False)
     tot = forms.IntegerField(widget=forms.NumberInput(), label="Seats")
-    dateTime = forms.DateTimeField(widget=forms.widgets.DateTimeInput(), label="Date Time YYYY-MM-DD HH:MM")
+    dateTime = forms.CharField(widget=forms.TextInput(attrs={'id':'datepicker-3'}))
     source = forms.ChoiceField(choices=CHOICE, initial='', widget=forms.Select())
     dest = forms.ChoiceField(choices=CHOICE, label="destination", initial='', widget=forms.Select())
     paid = forms.BooleanField(required=False)
@@ -47,12 +46,13 @@ CHOICES = (
 )
 
 
+
 class filterForm(forms.Form):
     source = forms.ChoiceField(choices=CHOICES, label="From", initial='', widget=forms.Select())
     dest = forms.ChoiceField(choices=CHOICES, label="To", initial='', widget=forms.Select())
     free = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'checkbox'}))
     tot = forms.IntegerField(widget=forms.NumberInput(), label="Slots")
-    date = forms.DateField(widget=forms.SelectDateWidget())
+    date = forms.CharField(widget=forms.TextInput(attrs={'id':'datepicker-3'}))
 
 
 class DeleteForm(forms.Form):

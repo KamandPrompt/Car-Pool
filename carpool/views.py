@@ -89,7 +89,7 @@ def dashboard(request):
             delform += [DeleteForm(initial={'pk': ride.pk})]
         if request.method == 'POST' and 'filter' in request.POST:
             filter = filterForm(request.POST)
-            indate = request.POST['date_year'] + '-' + request.POST['date_month'] + '-' + request.POST['date_day']
+            indate = request.POST['date']
             CHOICES = {'1': "Mandi", '2': "South Campus", '3': "North Campus", }
             if 'free' in request.POST:
                 allrides = Pool.objects.filter(source=CHOICES[request.POST['source']], dest=CHOICES[request.POST['dest']], tot__gte=request.POST['tot'], paid=False, dateTime__date = indate, )
