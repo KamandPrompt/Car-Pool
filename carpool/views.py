@@ -26,14 +26,12 @@ def new(request):
     error=""
     if request.user.is_authenticated:
         return HttpResponseRedirect('/')
-    elif request.method == 'POST':
+    if request.method == 'POST':
         form = SignUpForm(request.POST)
         if not IITmail(request):
             error+="Please use an IIT Mandi email."
-            return render(request, 'signup.html', {'form': form, 'error': error,})
-        elif not form.is_valid():
+        if not form.is_valid():
             error+="Invalid information/ Email already in use."
-            return render(request, 'signup.html', {'form': form, 'error': error,})
         else:
             user = form.save(commit=False)
             user.is_active = False
@@ -48,12 +46,12 @@ def new(request):
             })
             to_email = form.cleaned_data.get('email')
             send_mail(mail_subject, message, 'Hackweek@example.com', [to_email], fail_silently=False)
-            HttpResponseRedirect("{% url 'polls.signupcomp' %}")
+            return HttpResponseRedirect("/signupcomp/")
             # email = EmailMessage(mail_subject, message, to=[to_email])
             # email.send()
     else:
         form = SignUpForm()
-        return render(request, 'signup.html', {'form': form, 'error': error,})
+    return render(request, 'signup.html', {'form': form, 'error': error,})
 
 def signupcomp(request):
     return render(request,"signupcomp.html")
