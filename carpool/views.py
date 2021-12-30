@@ -8,6 +8,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.conf import settings
 from .tokens import account_activation_token
 import datetime
+from django.db.models import Q
 
 from .forms import SignUpForm, PoolForm, filterForm, DeleteForm, AddForm
 from .models import Pool, User
@@ -88,9 +89,9 @@ def dashboard(request):
             indate = request.POST['date']
             CHOICES = {'1': "Mandi", '2': "South Campus", '3': "North Campus", }
             if 'free' in request.POST:
-                allrides = Pool.objects.filter(source=CHOICES[request.POST['source']], dest=CHOICES[request.POST['dest']], tot__gte=request.POST['tot'], paid=False, dateTime__date = indate, )
+                allrides = Pool.objects.filter(Q(paid=False) | Q(amount=0), source=CHOICES[request.POST['source']], dest=CHOICES[request.POST['dest']], tot__gte=request.POST['tot'], dateTime__date = indate, )
             else:
-                allrides = Pool.objects.filter(source=CHOICES[request.POST['source']], dest=CHOICES[request.POST['dest']], tot__gte=request.POST['tot'], paid=True, dateTime__date = indate, )
+                allrides = Pool.objects.filter(source=CHOICES[request.POST['source']], dest=CHOICES[request.POST['dest']], tot__gte=request.POST['tot'], dateTime__date = indate, )
         else:
             filter = filterForm()
         for ride in allrides:
@@ -124,7 +125,8 @@ def dashboard(request):
 def addPool(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            form = PoolForm(request.POST, initial={'paid': False, 'user': request.user})
+            form = PoolForm(request.POST, initial={'paid': False, 'user': request.user, 'amount': 0})
+            
             if form.is_valid():
                 form.save()
         else:
