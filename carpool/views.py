@@ -6,6 +6,7 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMessage, send_mail
 from django.contrib.sites.shortcuts import get_current_site
 from django.conf import settings
+from django.contrib import messages
 from .tokens import account_activation_token
 import datetime
 
@@ -127,6 +128,9 @@ def addPool(request):
             form = PoolForm(request.POST, initial={'paid': False, 'user': request.user})
             if form.is_valid():
                 form.save()
+                messages.success(request, 'Your Ride has been successfully added.')
+                return redirect('dashboard');
+                
         else:
             form = PoolForm(initial={'paid': False, 'user': request.user})
         return render(request, 'add.html', {'form': form})

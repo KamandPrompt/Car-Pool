@@ -33,22 +33,21 @@
   <!-- Fonts -->
   <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
   <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
-  <link rel="shortcut icon" type="image/ico" href="{% static 'img/favicon.ico' %}"/>
+  <link rel="shortcut icon" type="image/ico" href="{% static 'img/favicon.ico' %}" />
 
   <!--for the datepicker-->
-  <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
-         rel = "stylesheet">
-      <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
-      <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-      
-      <!-- Javascript -->
-      <script>
-         $(function() {
-            $( "#datepicker-3" ).datepicker({
-               dateFormat:"yy-mm-dd",
-            });
-         });
-      </script>
+  <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+  <!-- Javascript -->
+  <script>
+    $(function () {
+      $("#datepicker-3").datepicker({
+        dateFormat: "yy-mm-dd",
+      });
+    });
+  </script>
   <!--end of datepicker setup-->
 
 </head>
@@ -56,6 +55,19 @@
 <body>
 
   <header class="header">
+
+    {% if messages %}
+    <div class="alert alert-success alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Successful Submission</strong>
+
+      <ul class="messages list-group">
+        {% for message in messages %}
+        <li {% if message.tags %} class=" {{ message.tags }} list-group-item" {% endif %}> {{ message }} </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
 
     <div class="top-menu">
 
@@ -72,11 +84,11 @@
             <div class="user-log">
 
               <a href="{% url 'addPool' %}">
-                                    Add Ride
-                                </a> /
+                Add Ride
+              </a> /
               <a href="{% url 'logout' %}">
-                                    Logout
-                                </a>
+                Logout
+              </a>
 
             </div><!-- end .user-log -->
             <!--ul class="social-icons">
@@ -129,40 +141,41 @@
               <article class="ride-box clearfix">
 
                 <div class="ride-content">
-                  <h3><a href="#">From {{ ride.source }} to {{ ride.dest }}</a></h3>ride by <a href="#">{{ ride.user.first_name }} {{ ride.user.last_name }}</a>
+                  <h3><a href="#">From {{ ride.source }} to {{ ride.dest }}</a></h3>ride by <a href="#">{{
+                    ride.user.first_name }} {{ ride.user.last_name }}</a>
                 </div>
 
                 <ul class="ride-meta">
-                    <li class="ride-date tooltip-link">
-                        <i class="fa fa-inr"></i>
-                        {% if ride.amount == None %}
-                            0
-                        {% else %}
-                            {{ ride.amount }}
-                        {% endif %}
-                    </li>
-                    <li class="ride-date">
-                      <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
-                                                        <i class="fa fa-calendar"></i>
-                                                        {{ ride.dateTime }}
-                                                    </a>
-                    </li><!-- end .ride-date -->
+                  <li class="ride-date tooltip-link">
+                    <i class="fa fa-inr"></i>
+                    {% if ride.amount == None %}
+                    0
+                    {% else %}
+                    {{ ride.amount }}
+                    {% endif %}
+                  </li>
+                  <li class="ride-date">
+                    <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
+                      <i class="fa fa-calendar"></i>
+                      {{ ride.dateTime }}
+                    </a>
+                  </li><!-- end .ride-date -->
 
-                    <li class="ride-people">
-                      <a href="#" class="tooltip-link" data-original-title="Number of seats" data-toggle="tooltip">
-                                                        <i class="fa fa-user"></i>
-                                                        {{ ride.slots.count }}
-                                                    </a>
-                    </li><!-- end .ride-people -->
+                  <li class="ride-people">
+                    <a href="#" class="tooltip-link" data-original-title="Number of seats" data-toggle="tooltip">
+                      <i class="fa fa-user"></i>
+                      {{ ride.slots.count }}
+                    </a>
+                  </li><!-- end .ride-people -->
 
                   <li>
                     {% for form in delform %}
                     {% if ride.pk == form.pk.value %}
-                        <form method="POST">
-                            {% csrf_token %}
-                            {{ form }}
-                            <button type="submit" name="del" class="cancel"><i class="fa fa-times"></i> Cancel</button>
-                        </form>
+                    <form method="POST">
+                      {% csrf_token %}
+                      {{ form }}
+                      <button type="submit" name="del" class="cancel"><i class="fa fa-times"></i> Cancel</button>
+                    </form>
                     {% endif %}
                     {% endfor %}
                   </li>
@@ -193,11 +206,11 @@
                 <div class="search-content">
 
                   <form method="post">
-                      {% csrf_token %}
-                      {{ filter }}
-                      <div class="field buttons">
-                        <button type="submit" class="btn btn-lg green-color" name="filter">Search</button>
-                      </div>
+                    {% csrf_token %}
+                    {{ filter }}
+                    <div class="field buttons">
+                      <button type="submit" class="btn btn-lg green-color" name="filter">Search</button>
+                    </div>
                   </form>
 
                   <!-- <form action="" novalidate autocomplete="off" class="idealforms searchtours">
@@ -280,42 +293,44 @@
                     <article class="ride-box clearfix">
 
                       <div class="ride-content">
-                        <h3><a href="#">From {{ ride.source }} to {{ ride.dest }}</a></h3>ride by <a href="#">{{ ride.user.first_name }} {{ ride.user.last_name }}</a>
+                        <h3><a href="#">From {{ ride.source }} to {{ ride.dest }}</a></h3>ride by <a href="#">{{
+                          ride.user.first_name }} {{ ride.user.last_name }}</a>
                       </div>
 
                       <ul class="ride-meta">
-                          <li class="ride-date tooltip-link">
-                              <i class="fa fa-inr"></i>
-                              {% if ride.amount == None %}
-                                  0
-                              {% else %}
-                                  {{ ride.amount }}
-                              {% endif %}
-                          </li>
+                        <li class="ride-date tooltip-link">
+                          <i class="fa fa-inr"></i>
+                          {% if ride.amount == None %}
+                          0
+                          {% else %}
+                          {{ ride.amount }}
+                          {% endif %}
+                        </li>
                         <li class="ride-date">
                           <a href="#" class="tooltip-link" data-original-title="Date" data-toggle="tooltip">
-                                                            <i class="fa fa-calendar"></i>
-                                                            {{ ride.dateTime }}
-                                                        </a>
+                            <i class="fa fa-calendar"></i>
+                            {{ ride.dateTime }}
+                          </a>
                         </li><!-- end .ride-date -->
 
                         <li class="ride-people">
                           <a href="#" class="tooltip-link" data-original-title="Number of seats" data-toggle="tooltip">
-                                                            <i class="fa fa-user"></i>
-                                                            {{ ride.tot }}
-                                                        </a>
+                            <i class="fa fa-user"></i>
+                            {{ ride.tot }}
+                          </a>
                         </li><!-- end .ride-people -->
 
                         <li>
-                            {% for form in addform %}
-                            {% if ride.pk == form.pk.value %}
-                                <form method="POST">
-                                    {% csrf_token %}
-                                    {{ form }}
-                                    <button type="submit" name="add" class="cancel"><i class="fa fa-file"></i> Book Ride</button>
-                                </form>
-                            {% endif %}
-                            {% endfor %}
+                          {% for form in addform %}
+                          {% if ride.pk == form.pk.value %}
+                          <form method="POST">
+                            {% csrf_token %}
+                            {{ form }}
+                            <button type="submit" name="add" class="cancel"><i class="fa fa-file"></i> Book
+                              Ride</button>
+                          </form>
+                          {% endif %}
+                          {% endfor %}
                         </li>
 
                       </ul><!-- end .ride-meta -->
@@ -421,7 +436,7 @@
             </div>
 
             <div class="field">
-              <input name="email" type="email"  placeholder="E-Mail">
+              <input name="email" type="email" placeholder="E-Mail">
               <span class="error"></span>
             </div>
 
@@ -431,7 +446,7 @@
             </div>
 
             <div class="field">
-              <input name="confirmpass" type="password"  placeholder="Password">
+              <input name="confirmpass" type="password" placeholder="Password">
               <span class="error"></span>
             </div>
 
@@ -468,7 +483,15 @@
   <script type="text/javascript" src="{% static 'js/bootstrap-rating-input.min.js' %}"></script>
   <!-- Slicknav  -->
   <script type="text/javascript" src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+  <script>
+    $("document").ready(() => {
+      $(".alert").fadeOut(4500);
+      $(".alert").delay(4000).slideUp(200, () => {
+        $(this).alert('close');
+      });
+    })
 
+  </script>
 </body>
 
 </html>
