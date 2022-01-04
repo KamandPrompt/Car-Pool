@@ -125,8 +125,7 @@ def dashboard(request):
 def addPool(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            form = PoolForm(request.POST, initial={'paid': False, 'user': request.user, 'amount': 0})
-            
+            form = PoolForm(request.POST, initial={'paid': False, 'user': request.user})
             if form.is_valid():
                 form.save()
         else:
