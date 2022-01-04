@@ -113,6 +113,19 @@
 
         <div class="page-content">
 
+          {% if messages %}
+          <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"  aria-label="close">&times;</button>
+            <strong>Successful Submission</strong>
+      
+            <ul class="messages list-group">
+              {% for message in messages %}
+              <li {% if message.tags %} class=" {{ message.tags }} list-group-item" {% endif %}> {{ message }} </li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+
           <div class="last-rides">
 
             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -468,6 +481,14 @@
   <script type="text/javascript" src="{% static 'js/bootstrap-rating-input.min.js' %}"></script>
   <!-- Slicknav  -->
   <script type="text/javascript" src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+
+  <script>
+    $("document").ready(() => {
+      $(".alert").delay(5000).slideUp(200, () => {
+        $(this).alert('close');
+      });
+    })
+  </script>
 
 </body>
 
