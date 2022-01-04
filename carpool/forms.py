@@ -46,7 +46,6 @@ CHOICES = (
 )
 
 
-
 class filterForm(forms.Form):
     source = forms.ChoiceField(choices=CHOICES, label="From", initial='', widget=forms.Select())
     dest = forms.ChoiceField(choices=CHOICES, label="To", initial='', widget=forms.Select())
