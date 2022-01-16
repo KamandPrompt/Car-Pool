@@ -113,6 +113,28 @@
 
         <div class="page-content">
 
+          {% if messages %}
+            {% for message in messages %}
+              {% if message.tags == 'success' %}
+                <div class="alert alert-success alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert"  aria-label="close">&times;</button>
+                  <strong>Successful Submission</strong>
+                  <ul class="messages list-group">
+                    <li class="{% if message.tags %} {{ message.tags }} {% endif %} list-group-item" > {{ message }} </li>
+                  </ul>
+                </div>
+              {% elif message.tags == 'error'%}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert"  aria-label="close">&times;</button>
+                  <strong>Error in Submission</strong>
+                  <ul class="messages list-group">
+                    <li class="{% if message.tags %} {{ message.tags }} {% endif %} list-group-item" > {{ message }} </li>
+                  </ul>
+                </div>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+
           <div class="last-rides">
 
             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -468,6 +490,14 @@
   <script type="text/javascript" src="{% static 'js/bootstrap-rating-input.min.js' %}"></script>
   <!-- Slicknav  -->
   <script type="text/javascript" src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+
+  <script>
+    $("document").ready(() => {
+      $(".alert").delay(5000).slideUp(200, () => {
+        $(this).alert('close');
+      });
+    })
+  </script>
 
 </body>
 
