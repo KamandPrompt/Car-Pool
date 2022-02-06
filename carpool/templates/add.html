@@ -92,7 +92,7 @@
                     <div class="col-sm-12 col-md-12 col-xs-12 add-rideclass">
 
                         <div class="page-content add-new-ride">
-
+                            {% include 'messages.html' %}
                             <form method="post">
                                 {% csrf_token %}
                                 {% for field in form %}

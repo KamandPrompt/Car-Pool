@@ -11,7 +11,7 @@ import datetime
 
 from .forms import SignUpForm, PoolForm, filterForm, DeleteForm, AddForm
 from .models import Pool, User
-
+from django.contrib import messages
 
 def IITmail(request):
     s = request.POST['email']
@@ -127,6 +127,10 @@ def addPool(request):
             form = PoolForm(request.POST, initial={'paid': False, 'user': request.user})
             if form.is_valid():
                 form.save()
+                messages.success(request, 'form submitted successfully.')
+                return render(request, 'add.html', {'form': form})
+            else:
+                messages.error(request, 'Invalid form submission.')
         else:
             form = PoolForm(initial={'paid': False, 'user': request.user})
         return render(request, 'add.html', {'form': form})
@@ -147,3 +151,5 @@ def activate(request, uidb64, token):
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
+
+
